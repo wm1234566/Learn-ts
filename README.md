@@ -1,9 +1,11 @@
+# 第一章 ts安装和使用
+
 学习路径：ts--react--flutter--go--算法--webgl--ts类型体操--游戏
 TS自动重启+TS自动运行+Parcel自动打包
 步骤如下：
-（1）初始化 npm init --yes 出现 package.json
+（1）初始化 ``npm init --yes ``出现 package.json
 （2） 安装 typescript
-全局安装 cnpm i typescript -g 或
+全局安装 ``cnpm i typescript -g`` 或
 本地安装： cnpm i typescript -D 或
 yarn安装 yarn global add typescript 
 【cnpm i typescript -D 是 cnpm install typescript --save-dev的缩写】
@@ -39,20 +41,20 @@ cnpm run start 【cnpm start】或 npm run start 【npm start】或 yarn run sta
 
 其中：nodemon 和ts-node是监听文件改变并用node环境执行，parcel是根据引入的ts编译为js，在浏览器中运行
 
-第一章 类
+# 第二章 类
 
-一、下列代码报错的解决方法？
+## 一、下列代码报错的解决方法？
 类中可以使用function定义方法吗？
 方法的默认返回值是？
 类的属性和方法的参数含义的不同？
-class Proson{
+```class Proson{
     public name:string
-}
-（一）4.0之前使用public name:string|undefined 解决
+}```
+（一）4.0之前使用`public name:string|undefined `解决
 （二）类中不可以使用function定义方法，直接写xxx()来定义方法
 （三）方法的默认返回值是void
 （四）类的属性是描述这个类的特征，类的方法是描述这个类的行为，方法的参数是行为的参数，这些属性与类属性无关，不是类的属性不应该放在类的属性中
-class Proson{
+```class Proson{
     // 对象的属性
     public name:string | undefined // 4.0之前解决方式,不好
     public age:number=11
@@ -67,84 +69,85 @@ class Proson{
     {
         console.log(`全局属性${this.age}`)
     }
-}
+}```
+```
 
-二、给对象赋值的方法？对象的属性和方法是实例共享的吗？对象方法的this的含义？
+## 二、给对象赋值的方法？对象的属性和方法是实例共享的吗？对象方法的this的含义？
 （一）1.通过类的属性和方法来赋值 2.通过构造函数来赋值
 （二）对象的属性是单独的，每个实例都有，而对象的方法在原型上，所有属性的都是共享的
 // 1.通过实例来赋值，注意每个对象属性都共享的，每个都有独立的实例，而方法是原形上的是共享的
-let zhangsan:Proson=new Proson();
+```let zhangsan:Proson=new Proson();
 zhangsan.name="张三" // 用对象属性直接赋值
 zhangsan.doEat("小张","你家")
-console.log("对象的实例",zhangsan)
+console.log("对象的实例",zhangsan)```
 （三）表示当前实例对象
+```
 
-三、引用数据类型有哪一些？如何定义数组，方法？
+## 三、引用数据类型有哪一些？如何定义数组，方法？
 （一）数组 ，函数，类，对象类型[{.... }格式]，对象数组类型，集合类【Set，Map,自定义 集合类】
 （二）(1)基本类型:[]/Array<基本类型> （2）变量名:():返回类型
     public img:"abc"[]=["abc"]
   public resolve:()=>void = ()=>{}
 ()=>{}是给他赋初值，方法的类型是没有{},而定义方法是有{}
 
-四、实现一个订单类有多个属性，一个商品详情，一个订单可能有多个商品，多个订单详情，如何在订单类中表示订单详情呢？
+## 四、实现一个订单类有多个属性，一个商品详情，一个订单可能有多个商品，多个订单详情，如何在订单类中表示订单详情呢？
 用商品类数组
 //;订单 Id，订单日期，顾客地址，顾客名，顾客微信，顾客手机号，客服
-class Order{
- public orderId:string="111"
- public date:Date=new Date()
- public phone:number=0
- // 
- //public orderDetail:OrderDetail[]=[]
- public orderDetail:Array<OrderDetail>=[] //使用数组对象
-    constructor(orderId_:string, date_:Date,phone_:number,orderDetail_:Array<OrderDetail>){
-         this.date=date_
-         this.orderId=orderId_
-         this.phone=phone_
-         this.orderDetail=orderDetail_
-    }
-}
-class OrderDetail{  
-    // 订单详情
-    public orderDetailId:number=0;
-    public productname:string ="npproduct" //商品名
-    public price:number=0;//
-    public count:number=0;//
-    constructor(orderDetailId:number,productname:string,price:number,count:number)
-    {
-    }
-}
+`class Order{`
+ `public orderId:string="111"`
+ `public date:Date=new Date()`
+ `public phone:number=0`
+ `//` 
+ `//public orderDetail:OrderDetail[]=[]`
+ `public orderDetail:Array<OrderDetail>=[] //使用数组对象`
+    `constructor(orderId_:string, date_:Date,phone_:number,orderDetail_:Array<OrderDetail>){`
+         `this.date=date_`
+         `this.orderId=orderId_`
+         `this.phone=phone_`
+         `this.orderDetail=orderDetail_`
+    `}`
+`}`
+`class OrderDetail{  
+    // 订单详情`
+    `public orderDetailId:number=0;`
+    `public productname:string ="npproduct" //商品名`
+    `public price:number=0;//`
+    `public count:number=0;//`
+    `constructor(orderDetailId:number,productname:string,price:number,count:number)`
+    `{`
+    `}`
+`}`
 
-五、为啥对象的属性不能不赋初值？
+## 五、为啥对象的属性不能不赋初值？
 如果就是不赋初值呢？
 如何省略书写对象中的属性和构造函数赋值？
 如果没有在构造函数中赋值，而有在对象中定义了变量，并且不想用联合类型undefined呢？
 （1）因为编译器认为没有初值就没有意义，
 （2）解决方法就是在构造函数中赋值，就可以不用赋初值
 （3）使用public来修饰构造函数的参数，可以省略
-// 订单类
-//;订单 Id，订单日期，顾客地址，顾客名，顾客微信，顾客手机号，客服
-class Order{
-//  public orderId:string="111"
-//  public date:Date=new Date()
-//  public phone:number=0
+`// 订单类`
+`//;订单 Id，订单日期，顾客地址，顾客名，顾客微信，顾客手机号，客服`
+`class Order{`
+`//  public orderId:string="111"`
+`//  public date:Date=new Date()`
+`//  public phone:number=0`
 
- // 
- //public orderDetail:OrderDetail[]=[]
-//  public orderDetail:Array<OrderDetail>=[] //使用数组对象
-    constructor(public orderId_:string, public date_:Date, public phone_:number, public orderDetail_:Array<OrderDetail>){
-        //  this.date=date_
-        //  this.orderId=orderId_
-        //  this.phone=phone_
-        //  this.orderDetail=orderDetail_
-    }
-}
+ `//` 
+ `//public orderDetail:OrderDetail[]=[]`
+`//  public orderDetail:Array<OrderDetail>=[] //使用数组对象`
+    `constructor(public orderId_:string, public date_:Date, public phone_:number, public orderDetail_:Array<OrderDetail>){`
+        `//  this.date=date_`
+        `//  this.orderId=orderId_`
+        `//  this.phone=phone_`
+        `//  this.orderDetail=orderDetail_`
+    `}`
+`}`
 
 //给构造器的参数如果加上public,这个参数就变成了一个属性,//
 这种简洁写法是两步综合体:第一步:定义了一个属性,
 / /第二步:等于默认构造函数会给这个属性赋值[隐式操作]
-（4）Ts4中，可以在属性后面加一个！ 编译器忽略这一个属性，表示是一个可有可无的属性
- public orderDetail!:Array<OrderDetail> //使用数组对象
-
+（4）Ts4中，可以在属性后面加一个<font color=red>！</font> 编译器忽略这一个属性，表示是一个可有可无的属性
+ `public orderDetail!:Array<OrderDetail> //使用数组对象`
 
 2-11函数重载,方法重载的重要性、优势
 
@@ -155,12 +158,17 @@ class Order{
 下面写法实现参数为数字返回一条消息，类型返回一组消息有何问题？如何解决？
 （一）type  新类型名=旧类型名; 表示给类型取一个新名字，注意：基本数据类型的值也都是类型，并且它的值是他自己
 （二）属性` find `在类型` Message[] `上不存在。你需要更改目标库吗?尝试将` lib `编译器选项更改为` es2015 `或更高版本。
- "target": "es5",                       // 指定 ECMAScript 目标版本: 'ES3' (default), 'ES5', 'ES6','ES2015', 'ES2016', 'ES2017', or 'ESNEXT'
+
+![六1](.\imgReadme\六1.jpg)
+
+ "target": "es5",                       
+
+// 指定 ECMAScript 目标版本: 'ES3' (default), 'ES5', 'ES6','ES2015', 'ES2016', 'ES2017', or 'ESNEXT'
 //      注意：target将ts转为最终target js版本是不全的，有些无法转换，无法做到完全兼容
       // 例如 代理反射等功能，所以考虑兼容性必须还要使用 babel进行兼容性转换
 
-      "module": "commonjs",                  // 指定使用模块: 'commonjs', 'amd', 'system', 'umd','es2015'
-  "lib": ["ES2020",”DOM”],  
+  ` `"module": "commonjs",                  // 指定使用模块: 'commonjs', 'amd', 'system', 'umd','es2015'`
+  "lib": ["ES2020",”DOM”],`  
 ,                             // 指定要包含在编译中的库文件, ----->>>一般在后端使用，要引入库的时候使用，默认引入浏览器运行的库
 找不到es6的find方法，将lib改为Es2020,DOM是可以调用浏览器api
 lib是编译前所用的库，他找不到es6，可以说是从lib编译到target
@@ -170,59 +178,59 @@ lib是编译前所用的库，他找不到es6，可以说是从lib编译到targe
 
 （三）.d.ts是一个ts的说明文件，其实现不在这里面，其内容是由接口描述组成
 （四）
-function getMessage(value:number|MessageType):Message|Array<Message>{
+`function getMessage(value:number|MessageType):Message|Array<Message>{`
 
-    if(typeof value==="number")
-    {
-      return messages.find((meg)=>value=== meg.id)  // 不能将类型“Message | undefined”分配给类型“Message | Message[]”。
-      //不能将类型“undefined”分配给类型“Message | Message[]”。ts(2322)
-    }
-    else
-    {
-        return messages.map((msg)=>msg.type===value)
-    }
-    
-}
+    `if(typeof value==="number")`
+    `{`
+      `return messages.find((meg)=>value=== meg.id)  // 不能将类型“Message | undefined”分配给类型“Message | Message[]”。`
+      `//不能将类型“undefined”分配给类型“Message | Message[]”。ts(2322)`
+    `}`
+    `else`
+    `{`
+        `return messages.map((msg)=>msg.type===value)`
+    `}`
+    
+`}`
 
 上面代码的原因是getMessage与find返回的类型不同，find会返回一个undefined，而getMessage没有，所以解决方法就是给getMessage一个undefined
-（五）
-type MessageType = "image" | "audio" | string;//联合类型
+（五）`
+``type MessageType = "image" | "audio" | string;//联合类型``
 
-type Message = {
-    id: number;
-    type: MessageType;
-    sendmessage: string;
-};
+`type Message = {`
+    `id: number;`
+    `type: MessageType;`
+    `sendmessage: string;`
+`};`
 
-let messages: Message[] = [
-    
-{ id: 1, type: 'image', sendmessage: "你好啊，今晚咱们一起去三里屯吧" },
-{
-    id: 2, type: 'audio', sendmessage: "朝辞白帝彩云间，千里江陵一日还"
-},
-{
-    id: 3, type: "audio", sendmessage: "你好!张无忌"
-},
-{
-    id: 4, type: 'image ', sendmessage: "刘老根苦练舞台绝技!"
-}]
+`let messages: Message[] = [`
+    
+`{ id: 1, type: 'image', sendmessage: "你好啊，今晚咱们一起去三里屯吧" },`
+`{`
+    `id: 2, type: 'audio', sendmessage: "朝辞白帝彩云间，千里江陵一日还"`
+`},`
+`{`
+    `id: 3, type: "audio", sendmessage: "你好!张无忌"`
+`},`
+`{`
+    `id: 4, type: 'image ', sendmessage: "刘老根苦练舞台绝技!"`
+`}]`
 
 // 参数可能是数字，或者特定字符串，返回值，为数字的时候返回一条消息，为数组类型所对应消息的的时候为一个数组
 
-function getMessage(value:number|MessageType):Message|Array<Message>|undefined{
+`function getMessage(value:number|MessageType):Message|Array<Message>|undefined{`
 
-    if(typeof value==="number")
-    {
-      return messages.find((meg)=>value=== meg.id)  // 不能将类型“Message | undefined”分配给类型“Message | Message[]”。
-      //不能将类型“undefined”分配给类型“Message | Message[]”。ts(2322)
-    }
-    else
-    {
-        return messages.filter((msg)=>msg.type===value)
-    }
-    
-}
-console.log(getMessage("audio"))
+    `if(typeof value==="number")`
+    `{`
+      `return messages.find((meg)=>value=== meg.id)  // 不能将类型“Message | undefined”分配给类型“Message | Message[]”。`
+      `//不能将类型“undefined”分配给类型“Message | Message[]”。ts(2322)`
+    `}`
+    `else`
+    `{`
+        `return messages.filter((msg)=>msg.type===value)`
+    `}`
+    
+`}`
+`console.log(getMessage("audio"))`
 
 // 1.上面的代码有两个问题
 // （1）函数可读性差，一个函数多个功能
@@ -234,12 +242,12 @@ console.log(getMessage("audio"))
 
 解决的方法：有三种
 // 2.强行转换
- let msg=(<Message>getMessage(1)).sendmessage;
+ `let msg=(<Message>getMessage(1)).sendmessage;`
  //（1）注意只能是联合内型中有的才可以
- // (2)使用断言
+  // (2)使用断言
 3.函数重载
 
-七、函数签名是什么？
+## 七、函数签名是什么？
 函数重载的定义？
 如果上面代码加上如果是返回一组数据，返回前面多少个的参数呢？
 下面代码为何报错？如何解决？
@@ -257,9 +265,7 @@ any和unknown的区别是？
 关于重载签名和实现签名的返回值类型规则完整总结如下:必须给重载签名提供返回值类型，TS无法默认推导。
 提供给重载签名的返回值类型不一定为其执行时的真实返回值类型，可以为重载签名提供真实返回值类型，也可以提供 void或unknown或 any类型，如果重载签名的返回值类型是void或, unknown或any 类型，那么将由实现签名来决定重载签名执行时的真实返回值类型。当然为了调用时能有自动提示+可读性更好+避免可能出现了类型强制转换，强烈建议为重载签名提供真实返回值类型o
 不管重载签名返回值类型是何种类型【包括后面讲的泛型类型】，实现签名都可以返回any类型或unknown类型，当然一般我们两者都不选择，让TS默认为实现签名自动推导返回值类型。
-（三）、
-
-由于第一个重载签名与实现签名融合，代码中会多出.splice(0,readRecordCount)这个变量，现在的问题变成了，两个重载签名有多个参数，而实现签名中又都用到了这些参数。
+（三）、由于第一个重载签名与实现签名融合，代码中会多出.splice(0,readRecordCount)这个变量，现在的问题变成了，两个重载签名有多个参数，而实现签名中又都用到了这些参数。
 
 第一个函数使用默认参数也不行！因为重载签名的参数是定义的外部需求
 
@@ -283,7 +289,7 @@ any和unknown的区别是？
 
 2. Java简易版ArrayList类和其中的方法重载代码实现
 
-八、构造器重载是什么？静态方法中的this是指向谁？
+## 八、构造器重载是什么？静态方法中的this是指向谁？
 （一）、构造器没有返回值，实现签名第一个参数要为前两个重载签名的联合类型或者any
 （二）、静态方法的this指向的是类对象本身，而不是实例对象，非静态方法的this指向的是实例对象
 
@@ -316,7 +322,7 @@ any和unknown的区别是？
 例如: let vechile: Car | Bus | Trunck。vechile可以断言成其中任意一种数据类型。例如vechile as Car，vechile as Bus, vechile as Trunck 。
 9.任何数据类型都可以转换成any 或unknown类型，any或unknown类型也可以转换成任何其他数据类型。
 
-九、断言和类型装换的关系？
+##  九、断言和类型装换的关系？
 继承关系的如何类型断言？
 没有继承关系的如何断言？
 接口之间如何断言呢？
@@ -401,19 +407,19 @@ abstract class类名{可以有0到多个抽象方法【只有方法体，没有�
 单纯从类的定义上来看和普通类没有区别，只是多了可以有0到多个抽象方法这一条。
 抽象类的特点
 可以包含只有方法体的方法【和方法签名类似，就是多了abstract关键字】，也可以包含实现了具体功能的方
-十、typeof的作用？
+## 十、typeof的作用？
 typeof的问题？如何解决？
 多态是什么？和断言的规则有什么区别？
 抽象类和普通类的区别？
 抽象类与接口的区别？
 （一）、typeof的作用是缩小类型的范围，例如编译器会直接将变量变为typeof的类型
-let value=obj[key]
-          
-            if(typeof value ==="function")
-            {
-            //   value()
-             obj[key]()
-            }
+`let value=o`bj[key]`
+          
+            `if(typeof value ==="function")`
+            `{`
+            `//   value()`
+             `obj[key]()`
+            }`
 
 （二）检测null为Object,检测对象都为object，
 检测null可以用Object.is() 检测对象为Object.prototype.toString().call()
@@ -429,20 +435,20 @@ let value=obj[key]
 
 理解:返回布尔值的条件表达式赋予类型守卫的能力，只有当图数返回 true 时，形参被确定为A类型
 自定义守卫的重要意义:编码展示其具体意义
-//   if(typeof value==="string") 这种写法不常用，因为如何很多修改起来麻烦，一般使用自定义守卫
+`//   if(typeof value==="string") 这种写法不常用，因为如何很多修改起来麻烦，一般使用自定义守卫`
 
 
 
 // 函数内的类型守卫，无法传递到函数内
 
-/*function isString(str:any):boolean {
+`/*function isString(str:any):boolean {
     if(typeof str ==="string")
     return true
     return false
-}*/
-function isString(str:any):str is string{ // 含义是：当返回true的时候，str就是string类型
-    return typeof str ==="string"
-}
+}*/`
+`function isString(str:any):str is string{ // 含义是：当返回true的时候，str就是string类型`
+    `return typeof str ==="string"`
+`}`
 
 
 
@@ -455,8 +461,7 @@ function isString(str:any):str is string{ // 含义是：当返回true的时候�
 2-34-2【 TypeScript4新特性】深入可变元组
 具体编码展示:
 
-
-十一、自定义守卫的作用？
+## 十一、自定义守卫的作用？
 函数内部的类型守卫可以传递出来吗？
 自定义守卫能确定某个具体的类型吗？
 const定义数组，不希望里面的元素被改变？？？这种类型如何当参数？？
@@ -471,21 +476,21 @@ const定义数组，不希望里面的元素被改变？？？这种类型如何
 （二）不可以，应该使用自定义守卫
 unknown 是所有类型的父类，不能用.语法，不能执行函数(),比any更加严格，但可以是有类型或自定义守卫缩小范围，让unknown能.和执行函数(),
 （三）可以，如下
-class Animo{
-    public age!:number
-     eat():void {
-  }
-}
+`class Animo{`
+    `public age!:number`
+     `eat():void {`
+  `}`
+`}`
 
- function isAnimo(animo:any):animo is Animo{
-      return animo instanceof Animo;
-}
+ `function isAnimo(animo:any):animo is Animo{`
+      `return animo instanceof Animo;`
+`}`
 
-let abc ="ddd"
-if(isAnimo(abc))
-{
-    abc.age
-}
+`let abc ="ddd"`
+`if(isAnimo(abc))`
+`{`
+    `abc.age`
+`}`
 
 （四）可以在数组后面加as const，变成只读数组，传入的时候要在数组类型前加readonly
 这种形参是不能修改的
@@ -499,43 +504,44 @@ function showArr(arr: readonly any[]) {
 showArr(arr1) //无法传入
 
 （五）在类型中添加...any[]即可
-// 可变元组
-// let [username,no]:[string,number]=["wangwu",23,"sdfsd","abcd","dddsfs"]
-// 前面两个是固定需要的，后面的可能要可能不要，如何实现？？
-let [username,no]:[string,number,...any[]]=["wangwu",23,"sdfsd","abcd","dddsfs"]
+`// 可变元组`
+`// let [username,no]:[string,number]=["wangwu",23,"sdfsd","abcd","dddsfs"]`
+`// 前面两个是固定需要的，后面的可能要可能不要，如何实现？？`
+`let [username,no]:[string,number,...any[]]=["wangwu",23,"sdfsd","abcd","dddsfs"]`
 
 
 // 给元组添加标签
-let [username,age,...rest]:[naem_:string,age_:number,...rest:any[]]=["wangwu",23,"sdfsd","abcd","dddsfs"]
+`let [username,age,...rest]:[naem_:string,age_:number,...rest:any[]]=["wangwu",23,"sdfsd","abcd","dddsfs"]`
 
-console.log("username",username) //username wangwu
-console.log("age",age)  //age 23
-console.log("rest",rest) //rest [ 'sdfsd', 'abcd', 'dddsfs' ]
+`console.log("username",username) //username wangwu`
+`console.log("age",age)  //age 23`
+`console.log("rest",rest) //rest [ 'sdfsd', 'abcd', 'dddsfs' ]`
 （六）可以但是变量名中不能加尾部的变量名
 // 如果可变部分为中间部分呢？
 let [info,ccc,...result]:[info_:string,_ccc:number,...result:any[],_descri:string]=["abc",11,"cd","ee"]
 // 前面不可以加，后面可以加变量
 
 （七）常量数组，不能设置类型，类型是只有变量有的
-const arr3:(string|number)[]=[10,30,40,"abc",30] 
-const arr4=[10,30,40,"abc",30] as const // 不可变数组没有类型 
+``const arr3:(string|number)[]=[10,30,40,"abc",30]` 
+`const arr4=[10,30,40,"abc",30] as const // 不可变数组没有类型`
+
 （八）可以互通
-// 1.元组退化为数组
-let constnum2=[10,30,40,60,"abc"]
-// 不能将类型“(string | number)[]”分配给类型“[number, ...any[]]”。源不提供目标中位置 0 处所需元素的匹配项。
-let [x2,...y2]:[...any[]] = constnum2 // 正确
-// 2.将数组固定，将元组类型固定
-let constnum3=[10,30,40,60,"abc"] as const
-let [x3,...y3]:readonly[number,...any]=constnum3
+`// 1.元组退化为数组`
+`let constnum2=[10,30,40,60,"abc"]`
+`// 不能将类型“(string | number)[]”分配给类型“[number, ...any[]]”。源不提供目标中位置 0 处所需元素的匹配项。`
+`let [x2,...y2]:[...any[]] = constnum2 // 正确`
+`// 2.将数组固定，将元组类型固定let constnum3=[10,30,40,60,"abc"] as const`
 
-function tail(constnum5:readonly [any,...any[]]){
-    let arr=constnum5
-}
+`let [x3,...y3]:readonly[number,...any]=constnum3`
 
-function tail(constnum5:readonly (string|number)[]){
-    let arr=constnum5
-}
-tail(constnum3)
+`function tail(constnum5:readonly [any,...any[]]){`
+    `let arr=constnum5`
+`}`
+
+`function tail(constnum5:readonly (string|number)[]){`
+    `let arr=constnum5`
+`}`
+`tail(constnum3)`
 
 
 （九）readonly，放在类型前面和 as const 都是表示固定不变的，包括数组和元组中每一个元素都不能改变，他们是等效的
@@ -614,12 +620,14 @@ DAO【数据访问层】理解:
 【先经
 过Service,Service大家先暂时不用管】。
 
+## 十二、泛型的作用是？
 
-十二、泛型的作用是？
-如何使用泛型？
-如何确定对象类型？
-泛型的默认值是什么？如何设置？
-Object，object和unknown的区别？
+
+## 如何使用泛型？
+
+## 如何确定对象类型？
+## 泛型的默认值是什么？如何设置？
+##Object，object和unknown的区别？
 
 （一）、泛型是参数化的类型，定义时不确定类型，使用（new 一个对象，调用函数）的时候确定类型（传入类型参数）
 
@@ -628,10 +636,10 @@ Object，object和unknown的区别？
 
 （二）泛型在对象 class a<T> T为类型变量，对象中所有为T的类型都可以用T代替，而使用时例如:new a<一个真是类型>()
 （三）、类型可以用type 类型={xx:string} instance xxx{}  或者typeof 对象，TS的typeof可以识别对象类型
-    let stuone1 = { stuname: "wnagwu", age: 23 }
+    `let stuone1 = { stuname: "wnagwu", age: 23 }`
 
-    let arr17 = new ArrayList1<{stuname: string;age: number;}>()
-    let arr18 = new ArrayList1<typeof stuone1>()
+    `let arr17 = new ArrayList1<{stuname: string;age: number;}>()`
+    `let arr18 = new ArrayList1<typeof stuone1>()`
 
-（四）、泛型的默认值是unknown，设置默认值为 class A<T=any> 或者class A<T=number>，class A<T={}>意思是如果不传入泛型类型，默认为any，默认为number
+（四）、泛型的默认值是unknown，设置默认值为 `class A<T=any>` 或者`class A<T=number>`，`class A<T={}>`意思是如果不传入泛型类型，默认为any，默认为number
 （五）、Object和unknown一样都是所有类型的父类（任意类型可以给他赋值），但是Object有自己的方法属性等，object这只是对象类型，是所有对象的父类，但是他没有方法和属性，他只有赋值类的对象和属性
