@@ -131,7 +131,7 @@
 
     // 3.泛型工厂函数
 
-    function createInstanceFactory1<T>(Constructor: { new(...arg: any): T }):T {
+    function createInstanceFactory1<T>(Constructor: { new (...arg: any): T }):T {
         console.log(Constructor.name + "创建的对象");
 
         return new Constructor("广大银行", "万绿园")
