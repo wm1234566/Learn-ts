@@ -2,7 +2,7 @@
  * @Author: wumeng 2100172067@qq.com
  * @Date: 2023-03-21 21:29:55
  * @LastEditors: wumeng 2100172067@qq.com
- * @LastEditTime: 2023-03-23 20:39:15
+ * @LastEditTime: 2023-03-27 15:23:43
  * @FilePath: \JavaScript\Ts\src\23.交叉类型.ts
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE/定义:将多个类型合并【多个类型属性和方法的并集】成的类型就是交叉类型。
 
@@ -80,6 +80,15 @@ export function isValidKey(
 ): key is keyof typeof object {
     return key in object;
 }
+
+
+export function isValidKey1(
+    key: keyof any,
+    object: object
+): key is keyof typeof object {
+    return key in object;
+}
+
 
 
 
